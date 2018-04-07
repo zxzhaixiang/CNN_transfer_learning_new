@@ -43,16 +43,19 @@ def loading_dataset(folderpath, classes, train_pct = 0.8, verbose = False):
 
 
 def evaluate_model(model, X_train, Y_train, X_test, Y_test, maxItem = 100):
-    #test model on training data set and testing data set
+    #test model on training data set and testing data set    
     nTrain = min([maxItem, X_train.shape[0]])
     print('Performance on Training data set (%d)' % nTrain)
-    preds = model.evaluate(X_train[0:nTrain], Y_train[0:nTrain])
-    print ("Loss = " + str(preds[0]))
-    print ("Train Accuracy = " + str(preds[1]))
+    loss_train, acc_train = model.evaluate(X_train[0:nTrain], Y_train[0:nTrain])
+    print ("Loss = " + str(loss_train))
+    print ("Train Accuracy = " + str(acc_train))
 
+    
     nTest = min([maxItem, X_test.shape[0]])
     print('Performance on Testing data set (%d)' % nTest)
-    preds = model.evaluate(X_test[0:nTest], Y_test[0:nTest])
-    print ("Loss = " + str(preds[0]))
-    print ("Test Accuracy = " + str(preds[1]))
+    loss_test, acc_test = model.evaluate(X_test[0:nTest], Y_test[0:nTest])
+    print ("Loss = " + str(loss_test))
+    print ("Test Accuracy = " + str(acc_test))
+
+    return loss_train, acc_train, loss_test, acc_test
 
